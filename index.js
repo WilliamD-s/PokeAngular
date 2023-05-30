@@ -4,7 +4,7 @@ var pokeApiApp = angular.module('pokeAngularApp', []);
 // Define the `PhoneListController` controller on the `phonecatApp` module
 pokeApiApp.controller('PhoneListController', function PhoneListController($scope, $http) {
     $scope.pokemons = [];
-    $scope.page = 1;
+    $scope.currentPage = 1;
 
     var data = null;
 
@@ -27,16 +27,21 @@ pokeApiApp.controller('PhoneListController', function PhoneListController($scope
     }
 
     $scope.nextPage = () => {
+        $scope.currentPage++;
         loadPage(data.next);
     }
     $scope.previousPage = () => {
-        loadPage(data.previous);
+        if($scope.currentPage > 1)
+            $scope.currentPage--;
+        
+            loadPage(data.previous);
     }
     loadPage();
 
     $scope.loadPicture = (urlCode) => {
         let urlPic = urlCode.substring(0,urlCode.lastIndexOf('/')) + '';
-        urlPic = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon' + urlPic.substring(urlPic.lastIndexOf('/'),urlPic.length + urlPic.lastIndexOf('/'))+ '.png';
+        // urlPic = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon' + urlPic.substring(urlPic.lastIndexOf('/'),urlPic.length + urlPic.lastIndexOf('/'))+ '.png';
+        urlPic = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/' + urlPic.substring(urlPic.lastIndexOf('/'),urlPic.length + urlPic.lastIndexOf('/'))+ '.gif';
         return urlPic;
     }
 });

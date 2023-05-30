@@ -1,0 +1,10 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.pokecard{
+    height: 156px !important;
+}
+.pokecard img{
+    max-height: 100px !important;
+}
